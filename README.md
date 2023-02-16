@@ -47,7 +47,7 @@ $ docker exec -it mysql-container mysql --password=<password>
 mysql > create user 'test'@'%' IDENTIFIED BY 'test1234';
 Query OK, 0 rows affected (0.01 sec)
 
-mysql > GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
+mysql > GRANT ALL PRIVILEGES ON *.* TO 'test'@'%' WITH GRANT OPTION;
 Query OK, 0 rows affected (0.01 sec)
 
 mysql > FLUSH PRIVILEGES;
@@ -56,9 +56,7 @@ Query OK, 0 rows affected (0.01 sec)
 mysql> exit
 ```
 - ```select host,user from mysql.user;```를 통해 계정 생성 여부를 확인합니다.
-
-
-- table과 row를 test로 생성하여 데이터가 잘 넘어오는지 확인합니다.
+- ```create database test;``` 데이터 베이스를 만들고 ```use test;```를 입력 후 table과 row를 생성하여 데이터가 잘 넘어오는지 확인합니다.
 
 예시)
 ```mysql
@@ -69,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY(id)
 );
 
-INSERT INTO `users` (`name',`email`) VALUES
+INSERT INTO `users` (name, email) VALUES
 ('john','john@example.com');
 
 ```
@@ -83,7 +81,7 @@ connection = pymysql.connect(
     port=3306,
     user='test',
     password='test1234',
-    db='dbname',
+    db='test',
     charset='utf8mb4',
     cursorclass=pymysql.cursors.DictCursor
 )
