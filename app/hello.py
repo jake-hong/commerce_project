@@ -10,12 +10,11 @@ def hello():
 
 
 @app.post("/")
-def post_hello(message: int):
-
+def post_hello(message: str):
     return {"response": f"{message}!!!"}
 
 
-post_hello("hello")
+post_hello(1)
 
 
 @app.get("/db")
